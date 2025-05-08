@@ -1,12 +1,12 @@
 //dbSingleton.js 
 const mysql = require('mysql2');
 
-let connection; // Variable for storing a single connection
+let connection; 
 
 const dbSingleton = {
     getConnection: () => {
         if (!connection) {
-            // Create a connection only once
+           
             connection = mysql.createConnection({
                 host: 'localhost',
                 user: 'root',
@@ -14,7 +14,7 @@ const dbSingleton = {
                 database: 'HW2',
             });
 
-            // Connect to the database
+            
             connection.connect((err) => {
                 if (err) {
                     console.error('Error connecting to database:', err);
@@ -23,16 +23,16 @@ const dbSingleton = {
                 console.log('Connected to MySQL!');
             });
 
-            // Handle connection errors
+           
             connection.on('error', (err) => {
                 console.error('Database connection error:', err);
                 if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-                    connection = null; // Update the connection state
+                    connection = null; 
                 }
             });
         }
 
-        return connection; // Return the current connection
+        return connection; 
     },
 };
 
